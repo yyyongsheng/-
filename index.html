@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>太帅了！</title>
+    <script>
+        ! function(win, doc) {
+            var d = doc.documentElement;
+
+            function change() {
+                d.style.fontSize = d.clientWidth / 375 + 'px';
+            }
+            win.addEventListener('resize', change, false);
+            change();
+        }(window, document);
+    </script>
+    <style>
+        #box {
+            height: 1rem;
+            line-height: 1rem;
+            background: rgba(0, 0, 0, .5);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div class="view">
+        点击次数<span id="cishu"></span>
+    </div>
+    <div class="click_area _box">
+        <div class="click_area_one _box"></div>
+        <div class="click_area_two _box"></div>
+        <div class="click_animation"></div>
+    </div>
+</body>
+
+</html>
+<script src="./js/jquery-1.8.3.min.js"></script>
+<script src="./js/fastclick.min.js"></script>
+<script>
+    function goPAGE() {
+        if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+            /*window.location.href="你的手机版地址";*/
+            alert("mobile")
+        } else {
+            /*window.location.href="你的电脑版地址";    */
+            alert("pc")
+        }
+    }
+    goPAGE();
+    if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+            FastClick.attach(document.body);
+        }, false);
+    }
+
+
+    // 1231321
+
+    var addTimer = function() {
+        var list = [],
+            currentTime,
+            interval;
+        return function(id, timeNum) {
+            currentTime = new Date().getTime() + timeNum * 1000;
+            if (!interval) {
+                interval = setInterval(setClock, 1);
+            }
+            list.push({
+                ele: document.getElementById(id),
+                time: timeNum
+            });
+        }
+
+        function setClock() {
+            for (var i = 0; i < list.length; i++) {
+                list[i].ele.innerHTML = changeTime(list[i].time);
+                if (!list[i].time) {
+                    list.splice(i--, 1);
+                }
+            }
+        }
+
+        function changeTime() {
+            var distancetime = currentTime - new Date().getTime();
+            if (distancetime > 0) {
+                var ms = Math.floor(distancetime % 1000) % 100;
+                var sec = Math.floor(distancetime / 1000 % 60);
+                // console.log(ms % 100);
+                // if (ms < 100) {
+                //     ms = "0" + ms;
+                // }
+                // if (sec < 10) {
+                //     sec = "0" + sec;
+                // }
+                return sec + ":" + ms;
+            } else {
+                clearInterval(interval);
+                time = false
+
+                return '0';
+            }
+        }
+    }();
+    var time = true
+    addTimer('box', 10);
+
+
+    var n = 0
+    $('.click_area').on('click', function() {
+        if (!time) return
+        n++
+        $('#cishu').text(n)
+            // $('.click_animation').addClass('click_animation_cur');
+        setCircle();
+        if ($('.click_animation').length > 10) {
+            $('.click_animation')[0].remove();
+        }
+    });
+    var setCircle = function() {
+        var clickBox = document.createElement('div');
+        clickBox.className = 'click_animation';
+        $('.click_area').append(clickBox);
+    }
+</script>

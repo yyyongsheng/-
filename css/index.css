@@ -1,0 +1,108 @@
+@import 'base.css';
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+  html {
+    font-size: 42.67px !important;
+  }
+}
+@media only screen and (min-width: 375px) and (max-width: 479px) {
+  html {
+    font-size: 50px !important;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 639px) {
+  html {
+    font-size: 64px !important;
+  }
+}
+@media only screen and (min-width: 640px) and (max-width: 749px) {
+  html {
+    font-size: 85.34px !important;
+  }
+}
+@media only screen and (min-width: 750px) and (max-width: 959px) {
+  html {
+    font-size: 100px !important;
+  }
+}
+@media only screen and (min-width: 960px) and (max-width: 1241px) {
+  html {
+    font-size: 128px !important;
+  }
+}
+@media only screen and (min-width: 1242px) {
+  html {
+    font-size: 165.6px !important;
+  }
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+.main {
+  box-sizing: border-box;
+  height: 100%;
+  padding: .15rem;
+  position: relative;
+}
+.main .box {
+  height: 100%;
+  background-color: #eee;
+}
+.click_area,
+._box {
+  position: fixed;
+  left: 0;
+  bottom: -25%;
+  width: 100%;
+  height: 50%;
+  border-radius: 50% 50% 0 0;
+  background-color: rgba(255, 255, 0, 0.4);
+}
+.click_area .click_area_one,
+._box .click_area_one {
+  transform: scale(0.85);
+}
+.click_area .click_area_two,
+._box .click_area_two {
+  transform: scale(0.7);
+}
+.click_area .click_animation,
+._box .click_animation {
+  position: fixed;
+  left: 50%;
+  bottom: -1.5rem;
+  margin-left: -1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: red;
+  transition: all 1s;
+  opacity: 0;
+  animation: clickAnimate 1s ease;
+}
+.click_area .click_animation_cur,
+._box .click_animation_cur {
+  width: 10rem;
+  height: 10rem;
+  margin-left: -5rem;
+  bottom: -5rem;
+  opacity: 0;
+  animation: clickAnimate 1s ease;
+}
+@keyframes clickAnimate {
+  0% {
+    width: 3rem;
+    height: 3rem;
+    margin-left: -1.5rem;
+    bottom: -1.5rem;
+    opacity: .75;
+  }
+  100% {
+    width: 10rem;
+    height: 10rem;
+    margin-left: -5rem;
+    bottom: -5rem;
+    opacity: 0;
+  }
+}
